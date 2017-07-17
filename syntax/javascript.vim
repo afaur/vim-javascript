@@ -32,6 +32,7 @@ syntax match   jsParensError    /[)}\]]/
 
 " Program Keywords
 syntax keyword jsStorageClass   const var let skipwhite skipempty nextgroup=jsDestructuringBlock,jsDestructuringArray,jsVariableDef
+syntax keyword jsDSLCustom      echo docListen docSilence winListen winSilence rID rCN
 syntax match   jsVariableDef    contained /\k\+/ skipwhite skipempty nextgroup=jsFlowDefinition
 syntax keyword jsOperator       delete instanceof typeof void new in of skipwhite skipempty nextgroup=@jsExpression
 syntax match   jsOperator       /[\!\|\&\+\-\<\>\=\%\/\*\~\^]\{1}/ skipwhite skipempty nextgroup=@jsExpression
@@ -238,7 +239,7 @@ if exists("javascript_plugin_flow")
 endif
 
 syntax cluster jsExpression  contains=jsBracket,jsParen,jsObject,jsTernaryIf,jsTaggedTemplate,jsTemplateString,jsString,jsRegexpString,jsNumber,jsFloat,jsOperator,jsBooleanTrue,jsBooleanFalse,jsNull,jsFunction,jsArrowFunction,jsGlobalObjects,jsExceptions,jsFutureKeys,jsDomErrNo,jsDomNodeConsts,jsHtmlEvents,jsFuncCall,jsUndefined,jsNan,jsPrototype,jsBuiltins,jsNoise,jsClassDefinition,jsArrowFunction,jsArrowFuncArgs,jsParensError,jsComment,jsArguments,jsThis,jsSuper,jsDo,jsForAwait,jsAsyncKeyword
-syntax cluster jsAll         contains=@jsExpression,jsStorageClass,jsConditional,jsRepeat,jsReturn,jsStatement,jsException,jsTry,jsNoise,jsBlockLabel
+syntax cluster jsAll         contains=@jsExpression,jsStorageClass,jsDSLCustom,jsConditional,jsRepeat,jsReturn,jsStatement,jsException,jsTry,jsNoise,jsBlockLabel
 
 " Define the default highlighting.
 " For version 5.7 and earlier: only when not done already
@@ -300,6 +301,7 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   HiLink jsOperator             Operator
   HiLink jsOf                   Operator
   HiLink jsStorageClass         StorageClass
+  HiLink jsDSLCustom            jsFuncName
   HiLink jsClassKeyword         Keyword
   HiLink jsExtendsKeyword       Keyword
   HiLink jsThis                 Special
